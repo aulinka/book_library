@@ -30,7 +30,12 @@ public class BookController {
     public Book updateBookById(@PathVariable Long bookId, @RequestBody Book book){
         for(Book b: books){
             if(b.id == bookId){
-                b = book;
+                b.id = book.id;
+                b.name = book.name;
+                b.isbn = book.isbn;
+                b.authorFirstname = book.authorFirstname;
+                b.authorLastname = book.authorLastname;
+                b.bookCount = book.bookCount;
             }
         }
         return book;
