@@ -8,32 +8,27 @@ import java.util.stream.Collectors;
 
 @RestController
 public class CustomerController {
-    public static final List<Customer> customers = new ArrayList();
+
 
     @PostMapping("/customers")
     public Customer createCustomer(@RequestBody Customer customer){
-        customers.add(customer);
-        return customer;
+        return createCustomer(customer);
     }
+
     @GetMapping("/customers")
     public List<Customer> getCustomerByLastName(@RequestParam String lastName){
-        return customers.stream().filter(customer -> customer.lastName.contains(lastName)).collect(Collectors.toList());
+        return getCustomerByLastName(lastName);
     }
     @GetMapping("/customers/{customerId}")
     public Customer getCustomerById(@PathVariable long customerId){
-        return customers.stream().filter(customer -> customer.id == customerId).findFirst().get();
+        return getCustomerById(customerId);
     }
     @PutMapping("/customers/{customerId}")
     public  Customer updateCustomerById(@PathVariable long customerId,@RequestBody Customer customer){
-        for(Customer c: customers){
-            if (c.id == customerId){
-                c = customer;
-            }
-        }
-        return customer;
+        return updateCustomerById(customerId,customer);
     }
     @DeleteMapping("/customers/{customerId}")
     public void deleteCustomerById(@PathVariable long customerId){
-        customers.removeIf(customer -> customer.id == customerId);
+        deleteCustomerById(customerId);
     }
 }
