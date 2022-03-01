@@ -8,42 +8,30 @@ import java.util.stream.Collectors;
 
 @RestController
 public class BookController {
-    public static final List<Book> books = new ArrayList<>();
 
     @GetMapping("/books")
     public List<Book> getBook(@RequestParam String name){
-        return books.stream().filter(book -> book.name.contains(name)).collect(Collectors.toList());
+        return getBook(name);
     }
 
     @PostMapping("/books")
     public Book addBook(@RequestBody Book book){
-        books.add(book);
-        return book;
+        return addBook(book);
     }
 
     @GetMapping("/books/{bookId}")
     public Book getBookById(@PathVariable long bookId){
-        return books.stream().filter(book -> book.id == bookId).findFirst().get();
+        return getBookById(bookId);
     }
 
     @PutMapping("/books/{bookId}")
-    public Book updateBookById(@PathVariable Long bookId, @RequestBody Book book){
-        for(Book b: books){
-            if(b.id == bookId){
-                b.id = book.id;
-                b.name = book.name;
-                b.isbn = book.isbn;
-                b.authorFirstname = book.authorFirstname;
-                b.authorLastname = book.authorLastname;
-                b.bookCount = book.bookCount;
-            }
-        }
-        return book;
+    public Book updateBookById(@PathVariable long bookId, @RequestBody Book book){
+        return updateBookById(bookId,book);
     }
 
     @DeleteMapping("/books/{bookId}")
     public void deleteBookById(@PathVariable long bookId){
-        books.removeIf(book -> book.id == bookId);
+        deleteBookById(bookId);
     }
 }
 
