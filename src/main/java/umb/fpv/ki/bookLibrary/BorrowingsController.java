@@ -8,20 +8,22 @@ import java.util.List;
 @RestController
 public class BorrowingsController {
 
-    @PostMapping("/borrowings")
+    BorrowingsService borrowingsService;
+
+    @PostMapping("/api/borrowings")
     public void createBorrowing(@RequestBody Borrowings b) {
-        createBorrowing(b);
+        borrowingsService.createBorrowing(b);
     }
-    @GetMapping("/borrowings")
+    @GetMapping("/api/borrowings")
     public List<Borrowings> listBorrowings(){
-        return listBorrowings();
+        return borrowingsService.listBorrowings();
     }
-    @GetMapping("/borrowings/{borrowingId}")
+    @GetMapping("/api/borrowings/{borrowingId}")
     public Borrowings getBorrowingById(@PathVariable long borrowingId){
-        return getBorrowingById(borrowingId);
+        return borrowingsService.getBorrowingById(borrowingId);
     }
-    @DeleteMapping("/borrowings/{borrowingId}")
+    @DeleteMapping("/api/borrowings/{borrowingId}")
     public void deleteBorrowingById(@PathVariable long borrowingId){
-       deleteBorrowingById(borrowingId);
+        borrowingsService.deleteBorrowingById(borrowingId);
     }
 }

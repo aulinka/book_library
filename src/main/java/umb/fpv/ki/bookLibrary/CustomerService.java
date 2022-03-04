@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
+
     public static final List<Customer> customers = new ArrayList();
 
     public Customer createCustomer(Customer customer){

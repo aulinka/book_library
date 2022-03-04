@@ -7,5 +7,4 @@ public class Book {
     public String authorFirstname;
     public String authorLastname;
     public int bookCount;
-
 }

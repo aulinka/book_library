@@ -1,16 +1,16 @@
 package umb.fpv.ki.bookLibrary;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BorrowingsService {
+
     public  final List<Borrowings> borrowings = new ArrayList();
     public BookService bookService;
     public CustomerService customerService;
+
     public void createBorrowing(Borrowings b){
         borrowings.add(b);
     }

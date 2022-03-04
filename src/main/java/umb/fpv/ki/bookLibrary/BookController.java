@@ -9,29 +9,27 @@ import java.util.stream.Collectors;
 @RestController
 public class BookController {
 
-    @GetMapping("/books")
-    public List<Book> getBook(@RequestParam String name){
-        return getBook(name);
-    }
+    BookService bookService;
 
-    @PostMapping("/books")
+    @GetMapping("/api/books")
+    public List<Book> getBook(@RequestParam String title){
+        return bookService.getBook(title);
+    }
+    @PostMapping("/api/books")
     public Book addBook(@RequestBody Book book){
-        return addBook(book);
+        return bookService.addBook(book);
     }
-
-    @GetMapping("/books/{bookId}")
+    @GetMapping("/api/books/{bookId}")
     public Book getBookById(@PathVariable long bookId){
-        return getBookById(bookId);
+        return bookService.getBookById(bookId);
     }
-
-    @PutMapping("/books/{bookId}")
+    @PutMapping("/api/books/{bookId}")
     public Book updateBookById(@PathVariable long bookId, @RequestBody Book book){
-        return updateBookById(bookId,book);
+        return bookService.updateBookById(bookId,book);
     }
-
-    @DeleteMapping("/books/{bookId}")
+    @DeleteMapping("/api/books/{bookId}")
     public void deleteBookById(@PathVariable long bookId){
-        deleteBookById(bookId);
+        bookService.deleteBookById(bookId);
     }
 }
 

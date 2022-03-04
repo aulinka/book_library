@@ -9,26 +9,26 @@ import java.util.stream.Collectors;
 @RestController
 public class CustomerController {
 
+    CustomerService customerService;
 
-    @PostMapping("/customers")
+    @PostMapping("/api/customers")
     public Customer createCustomer(@RequestBody Customer customer){
-        return createCustomer(customer);
+        return customerService.createCustomer(customer);
     }
-
-    @GetMapping("/customers")
+    @GetMapping("/api/customers")
     public List<Customer> getCustomerByLastName(@RequestParam String lastName){
-        return getCustomerByLastName(lastName);
+        return customerService.getCustomerByLastName(lastName);
     }
-    @GetMapping("/customers/{customerId}")
+    @GetMapping("/api/customers/{customerId}")
     public Customer getCustomerById(@PathVariable long customerId){
-        return getCustomerById(customerId);
+        return customerService.getCustomerById(customerId);
     }
-    @PutMapping("/customers/{customerId}")
+    @PutMapping("/api/customers/{customerId}")
     public  Customer updateCustomerById(@PathVariable long customerId,@RequestBody Customer customer){
-        return updateCustomerById(customerId,customer);
+        return customerService.updateCustomerById(customerId,customer);
     }
-    @DeleteMapping("/customers/{customerId}")
+    @DeleteMapping("/api/customers/{customerId}")
     public void deleteCustomerById(@PathVariable long customerId){
-        deleteCustomerById(customerId);
+        customerService.deleteCustomerById(customerId);
     }
 }
