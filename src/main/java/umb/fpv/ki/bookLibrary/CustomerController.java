@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 public class CustomerController {
 
     CustomerService customerService;
+    public CustomerController(CustomerService customerService){
+        this.customerService = customerService;
+    }
 
     @PostMapping("/api/customers")
     public Customer createCustomer(@RequestBody Customer customer){

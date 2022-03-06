@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 public class BookController {
 
     BookService bookService;
+    public BookController(BookService bookService){
+        this.bookService = bookService;
+    }
 
     @GetMapping("/api/books")
     public List<Book> getBook(@RequestParam String title){

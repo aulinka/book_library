@@ -1,5 +1,4 @@
 package umb.fpv.ki.bookLibrary;
-
 public class Book {
     public long id;
     public String name;
