@@ -1,7 +1,6 @@
 package umb.fpv.ki.bookLibrary;
 
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,17 +8,30 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerService {
 
-    public static final List<Customer> customers = new ArrayList();
+    public final List<Customer> customers = new ArrayList();
+    private CustomerService customerService;
+    private CustomerRepository customerRepository;
 
-    public Customer createCustomer(Customer customer){
-        customers.add(customer);
+
+
+    public CustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    public Customer createCustomer(String firstName, String lastName, String email, long id){
+        Customer customer = new Customer();
+        //TODO
+
         return customer;
     }
-    public List<Customer> getCustomerByLastName(String lastname){
-        return customers.stream().filter(customer -> customer.lastName.contains(lastname)).collect(Collectors.toList());
+    public List<Customer> listCustomers(){
+        return customers;
     }
+
     public Customer getCustomerById(long customerId){
-        return customers.stream().filter(customer -> customer.id == customerId).findFirst().get();
+        Customer c = new Customer();
+        //TODO
+        return c;
     }
     public  Customer updateCustomerById(long customerId, Customer customer){
         for(Customer c: customers){
