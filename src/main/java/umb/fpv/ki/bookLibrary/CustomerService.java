@@ -20,8 +20,10 @@ public class CustomerService {
 
     public Customer createCustomer(String firstName, String lastName, String email, long id){
         Customer customer = new Customer();
-        //TODO
-
+        customer.firstName = firstName;
+        customer.lastName = lastName;
+        customer.email = email;
+        customer.id = id;
         return customer;
     }
     public List<Customer> listCustomers(){
@@ -30,7 +32,7 @@ public class CustomerService {
 
     public Customer getCustomerById(long customerId){
         Customer c = new Customer();
-        //TODO
+        Customer customer = customerService.getCustomerById(c.id);
         return c;
     }
     public  Customer updateCustomerById(long customerId, Customer customer){
