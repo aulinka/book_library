@@ -22,10 +22,10 @@ public class BorrowingService {
 
     public Borrowing createBorrowing(long bookid, long customerId){
         Borrowing borrowing = new Borrowing();
-        Customer cId = this.customerService.getCustomerById(customerId);
-        Book bId = this.bookService.getBookById(bookid);
-        borrowing.borrower = cId;
-        borrowing.book = bId;
+        Customer customer = this.customerService.getCustomerById(customerId);
+        Book book = this.bookService.getBookById(bookid);
+        borrowing.borrower = customer;
+        borrowing.book = book;
         return borrowingRepository.save(borrowing);
 
 
