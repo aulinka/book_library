@@ -32,10 +32,12 @@ public class BorrowingService {
         return borrowings;
     }
     public Borrowing getBorrowingById(long borrowingId){
-        Borrowing b = new Borrowing();
-        Book book = bookService.getBookById(b.book.id);
-        Customer customer = customerService.getCustomerById(b.borrower.id);
-        return b;
+        for (Borrowing b : borrowings) {
+            if (b.id == borrowingId) {
+                return b;
+            }
+        }
+        return null;
     }
     public void deleteBorrowingById(long borrowingId){
         borrowings.removeIf(borrowing -> borrowing.id == borrowingId);
