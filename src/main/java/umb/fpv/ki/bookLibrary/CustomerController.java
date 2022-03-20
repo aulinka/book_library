@@ -16,7 +16,7 @@ public class CustomerController {
 
     @PostMapping("/api/customers")
     public CustomerDTO createCustomer(@RequestBody CustomerDTO c){
-        Customer customer = customerService.createCustomer(c.getFirstName(),c.getLastName(),c.getEmail(),c.getId());
+        Customer customer = customerService.createCustomer(c.getFirstName(),c.getLastName(),c.getEmail());
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setFirstName(customer.firstName);
         customerDTO.setLastName(customer.lastName);
