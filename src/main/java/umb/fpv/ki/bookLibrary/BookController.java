@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class BookController {
@@ -16,7 +15,7 @@ public class BookController {
     }
     @PostMapping("/api/books")
     public BookDTO addBook(@RequestBody BookDTO bo) {
-        Book book = bookService.addBook(bo.getId(), bo.getTitle(), bo.getAuthorFirstname(), bo.getAuthorLastname(), bo.getIsbn(), bo.getBookCount());
+        Book book = bookService.addBook(bo.getTitle(), bo.getAuthorFirstname(), bo.getAuthorLastname(), bo.getIsbn(), bo.getBookCount());
         BookDTO bookDTO = new BookDTO();
         bookDTO.setId(book.id);
         bookDTO.setTitle(book.name);

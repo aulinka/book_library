@@ -4,55 +4,52 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
 
     private final List<Book> books = new ArrayList();
-    private BookService bookService;
+
     private BookRepository bookRepository;
 
-    public BookService(BookService bookService, BookRepository bookRepository) {
-        this.bookService = bookService;
+    public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
     public List<Book> listBooks() {
-        return books;
+        return bookRepository.findAll();
     }
 
-    public Book addBook(long id, String name, String isbn, String authorFirstName, String authorLastName, int bookCount) {
+    public Book addBook(String name, String isbn, String authorFirstName, String authorLastName, int bookCount) {
         Book book = new Book();
-        book.id = id;
         book.name = name;
         book.isbn = isbn;
         book.authorFirstname = authorFirstName;
         book.authorLastname = authorLastName;
         book.bookCount = bookCount;
-        return book;
+        return bookRepository.save(book);
     }
 
     public Book getBookById(long bookId) {
-        Book bo = new Book();
-        Book book = bookService.getBookById(bo.id);
-        return bo;
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
+        return optionalBook.orElse(null);
     }
 
     public Book updateBookById(long bookId, Book book) {
-        for(Book b: books){
-            if(b.id == bookId){
-                b.id = book.id;
-                b.name = book.name;
-                b.isbn = book.isbn;
-                b.authorFirstname = book.authorFirstname;
-                b.authorLastname = book.authorLastname;
-                b.bookCount = book.bookCount;
-            }
+        Book b = this.getBookById(bookId);
+        if(b != null) {
+            b.name = book.name;
+            b.isbn = book.isbn;
+            b.authorFirstname = book.authorFirstname;
+            b.authorLastname = book.authorLastname;
+            b.bookCount = book.bookCount;
+            return bookRepository.save(b);
         }
-        return book;
+        return null;
     }
 
     public void deleteBookById(long bookId) {
-        books.removeIf(book -> book.id == bookId);
+        bookRepository.deleteById(bookId);
     }
 }
