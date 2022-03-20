@@ -34,10 +34,10 @@ public class BorrowingService {
         return borrowingRepository.findAll();
     }
     public Borrowing getBorrowingById(long borrowingId){
-        Optional<Borrowing> optionalBorrowing = borrowingRepository.findById((int)borrowingId);
+        Optional<Borrowing> optionalBorrowing = borrowingRepository.findById(borrowingId);
         return optionalBorrowing.orElse(null);
     }
     public void deleteBorrowingById(long borrowingId){
-        borrowingRepository.deleteById((int)borrowingId);
+        borrowingRepository.deleteById(borrowingId);
     }
 }

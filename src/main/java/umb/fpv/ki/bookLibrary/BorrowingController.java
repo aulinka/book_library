@@ -21,6 +21,9 @@ public class BorrowingController {
         borrowingDTO.setBookId(borrowing.book.id);
         borrowingDTO.setCustomerId(borrowing.borrower.id);
         borrowingDTO.setId(borrowing.id);
+        borrowingDTO.setCustomerName(borrowing.borrower.firstName + " " + borrowing.borrower.lastName);
+        borrowingDTO.setAuthorName(borrowing.book.authorFirstname + " " + borrowing.book.authorLastname);
+        borrowingDTO.setTitle(borrowing.book.name);
         return borrowingDTO;
     }
     @GetMapping("/api/borrowings")
@@ -32,6 +35,10 @@ public class BorrowingController {
             borrowingDTO.setId(b.id);
             borrowingDTO.setCustomerId(b.borrower.id);
             borrowingDTO.setBookId(b.book.id);
+            borrowingDTO.setCustomerName(b.borrower.firstName + " " + b.borrower.lastName);
+            borrowingDTO.setAuthorName(b.book.authorFirstname + " " + b.book.authorLastname);
+            borrowingDTO.setTitle(b.book.name);
+            borrowingDTOS.add(borrowingDTO);
         }
         return borrowingDTOS;
     }
