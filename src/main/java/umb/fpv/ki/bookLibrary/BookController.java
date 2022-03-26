@@ -14,15 +14,16 @@ public class BookController {
         this.bookService = bookService;
     }
     @PostMapping("/api/books")
-    public BookDTO addBook(@RequestBody BookDTO bo) {
-        Book book = bookService.addBook(bo.getTitle(), bo.getAuthorFirstname(), bo.getAuthorLastname(), bo.getIsbn(), bo.getBookCount());
+    public BookDTO createBook(@RequestBody BookDTO inBook) {
+        Book book = bookService.addBook(
+               inBook.name, inBook.isbn, inBook.authorFirstName, inBook.authorLastName, inBook.bookCount);
         BookDTO bookDTO = new BookDTO();
-        bookDTO.setId(book.id);
-        bookDTO.setTitle(book.name);
-        bookDTO.setAuthorFirstname(book.authorFirstname);
-        bookDTO.setAuthorLastname(book.authorLastname);
-        bookDTO.setIsbn(book.isbn);
-        bookDTO.setBookCount(book.bookCount);
+        bookDTO.id = (book.id);
+        bookDTO.name = (book.name);
+        bookDTO.authorFirstName = (book.authorFirstname);
+        bookDTO.authorLastName = (book.authorLastname);
+        bookDTO.isbn = (book.isbn);
+        bookDTO.bookCount = (book.bookCount);
         return bookDTO;
     }
 
@@ -32,12 +33,13 @@ public class BookController {
         List<Book> books = bookService.listBooks();
         for (Book bo: books) {
             BookDTO bookDTO = new BookDTO();
-            bookDTO.setId(bo.id);
-            bookDTO.setTitle(bo.name);
-            bookDTO.setAuthorFirstname(bo.authorFirstname);
-            bookDTO.setAuthorLastname(bo.authorLastname);
-            bookDTO.setIsbn(bo.isbn);
-            bookDTO.setBookCount(bo.bookCount);
+            bookDTO.id=bo.id;
+            bookDTO.name = bo.name;
+            bookDTO.authorFirstName = bo.authorFirstname;
+            bookDTO.authorLastName = bo.authorLastname;
+            bookDTO.isbn = bo.isbn;
+            bookDTO.bookCount = bo.bookCount;
+            bookDTOS.add(bookDTO);
         }
         return bookDTOS;
     }
@@ -46,7 +48,7 @@ public class BookController {
     public BookDTO getBookById(@PathVariable long bookId){
         BookDTO bookDTO = new BookDTO();
         Book book = bookService.getBookById(bookId);
-        bookDTO.setId(bookId);
+        bookDTO.id= bookId;
         return bookDTO;
     }
 
