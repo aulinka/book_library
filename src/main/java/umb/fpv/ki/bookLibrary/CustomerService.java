@@ -16,7 +16,6 @@ public class CustomerService {
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-
     public Customer createCustomer(String firstName, String lastName, String email){
         Customer customer = new Customer();
         customer.firstName = firstName;
@@ -27,7 +26,6 @@ public class CustomerService {
     public List<Customer> listCustomers(){
         return customerRepository.findAll();
     }
-
     public Customer getCustomerById(long customerId){
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
         return optionalCustomer.orElse(null);
@@ -45,6 +43,5 @@ public class CustomerService {
     }
     public void deleteCustomerById(long customerId){
         customerRepository.deleteById(customerId);
-
     }
 }

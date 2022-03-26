@@ -13,11 +13,14 @@ public class BorrowingService {
     private BookService bookService;
     private CustomerService customerService;
     private BorrowingRepository borrowingRepository;
+    private BookRepository bookRepository;
 
-    public BorrowingService(BookService bookService, CustomerService customerService, BorrowingRepository borrowingRepository) {
+    public BorrowingService(BookService bookService, CustomerService customerService, BorrowingRepository borrowingRepository,
+                            BookRepository bookRepository) {
         this.bookService = bookService;
         this.customerService = customerService;
         this.borrowingRepository = borrowingRepository;
+        this.bookRepository = bookRepository;
     }
 
     public Borrowing createBorrowing(long bookid, long customerId){
@@ -26,6 +29,8 @@ public class BorrowingService {
         Book book = this.bookService.getBookById(bookid);
         borrowing.borrower = customer;
         borrowing.book = book;
+        borrowing.book.bookCount--;
+        bookRepository.save(borrowing.book);
         return borrowingRepository.save(borrowing);
 
 
@@ -38,6 +43,10 @@ public class BorrowingService {
         return optionalBorrowing.orElse(null);
     }
     public void deleteBorrowingById(long borrowingId){
+        Borrowing borrowing;
+        borrowing = borrowingRepository.findById(borrowingId).orElse(null);
+        borrowing.book.bookCount++;
+        bookRepository.save(borrowing.book);
         borrowingRepository.deleteById(borrowingId);
     }
 }

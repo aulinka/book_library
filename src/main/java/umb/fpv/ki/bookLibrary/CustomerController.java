@@ -16,12 +16,12 @@ public class CustomerController {
 
     @PostMapping("/api/customers")
     public CustomerDTO createCustomer(@RequestBody CustomerDTO c){
-        Customer customer = customerService.createCustomer(c.getFirstName(),c.getLastName(),c.getEmail());
+        Customer customer = customerService.createCustomer(c.firstName,c.lastName,c.email);
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setFirstName(customer.firstName);
-        customerDTO.setLastName(customer.lastName);
-        customerDTO.setEmail(customer.email);
-        customerDTO.setId(customer.id);
+        customerDTO.firstName = (customer.firstName);
+        customerDTO.lastName = (customer.lastName);
+        customerDTO.email = (customer.email);
+        customerDTO.id = (customer.id);
         return customerDTO;
     }
 
@@ -32,10 +32,11 @@ public class CustomerController {
         List<Customer> customers = customerService.listCustomers();
         for (Customer c: customers){
             CustomerDTO customerDTO = new CustomerDTO();
-            customerDTO.setFirstName(c.firstName);
-            customerDTO.setLastName(c.lastName);
-            customerDTO.setEmail(c.email);
-            customerDTO.setId(c.id);
+            customerDTO.firstName = (c.firstName);
+            customerDTO.lastName = (c.lastName);
+            customerDTO.email = (c.email);
+            customerDTO.id = (c.id);
+            customerDTOS.add(customerDTO);
         }
         return customerDTOS;
     }
@@ -44,7 +45,10 @@ public class CustomerController {
     public CustomerDTO getCustomerById(@PathVariable long customerId){
         CustomerDTO customerDTO = new CustomerDTO();
         Customer customer = customerService.getCustomerById(customerId);
-        customerDTO.setId(customerId);
+        customerDTO.id = (customerId);
+        customerDTO.email = (customer.email);
+        customerDTO.firstName = (customer.firstName);
+        customerDTO.lastName = (customer.lastName);
         return customerDTO;
     }
     @PutMapping("/api/customers/{customerId}")
